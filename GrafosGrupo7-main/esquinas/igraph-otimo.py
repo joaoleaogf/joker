@@ -28,7 +28,7 @@ g.add_edges(list(edges))  # Adicionar as arestas únicas
 
 # Adicionar pesos das arestas
 g.es["weight"] = weights
-g.es["label"] = [f"{peso:.2f}" for peso in weights]
+g.es["label"] = [f"{peso:.4f}" for peso in weights]
 
 # Configurar estilos de visualização
 visual_style = {

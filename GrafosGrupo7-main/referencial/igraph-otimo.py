@@ -2,8 +2,8 @@ import json
 from igraph import Graph, plot
 
 # Caminho para o arquivo de arestas otimizadas
-input_edges_file = "/home/ddmx/Documentos/plataforma/joker/GrafosGrupo7-main/referencial/arestas_otimizadas-2.json"
-output_graph_file = "/home/ddmx/Documentos/plataforma/joker/GrafosGrupo7-main/referencial/grafo_arestas_otimizadas.png"
+input_edges_file = "GrafosGrupo7-main/referencial/arestas_otimizadas-2.json"
+output_graph_file = "GrafosGrupo7-main/referencial/grafo_arestas_otimizadas.png"
 
 # Carregar as arestas otimizadas do arquivo JSON
 with open(input_edges_file, "r") as file:

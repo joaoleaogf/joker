@@ -4,16 +4,16 @@ from itertools import combinations
 from collections import defaultdict
 from networkx import MultiGraph
 
-# Caminhos para os arquivos 
-adjacency_list_file = "GrafosGrupo7-main/referencial/adjacency_list.json"
-edge_weights_file = "GrafosGrupo7-main/referencial/arestas_otimizadas.json"
+# # Caminhos para os arquivos 
+# adjacency_list_file = "GrafosGrupo7-main/referencial/adjacency_list.json"
+# edge_weights_file = "GrafosGrupo7-main/referencial/arestas_otimizadas.json"
 
 
-esq_adjacency_list_file = "GrafosGrupo7-main/esquinas/adjacency_list.json"
-esq_edge_weights_file = "GrafosGrupo7-main/esquinas/arestas_pesos_list.json"
+# esq_adjacency_list_file = "GrafosGrupo7-main/esquinas/adjacency_list.json"
+# esq_edge_weights_file = "GrafosGrupo7-main/esquinas/arestas_pesos_list.json"
 
-# Definir o vértice inicial fixo
-fixed_start_node = 61
+# # Definir o vértice inicial fixo
+# fixed_start_node = 61
 
 def fleury_algorithm_circuit(graph: MultiGraph, start_node):
     temp_graph = graph.copy()  # Cria uma cópia do grafo
@@ -61,8 +61,6 @@ def fleury_algorithm_circuit(graph: MultiGraph, start_node):
 
 
 def carteiroChines(adj_list, edge_weights_list, start_node):
-    # Converter a lista de pesos de arestas em um dicionário
-    edge_weights = {item["key"]: item["value"] for item in edge_weights_list}
 
     G = nx.MultiGraph()
     
@@ -79,7 +77,7 @@ def carteiroChines(adj_list, edge_weights_list, start_node):
                 continue
             
             # Buscar o peso da aresta, independentemente da ordem
-            weight = edge_weights.get(f"{node}-{neighbor}") or edge_weights.get(f"{neighbor}-{node}") or 1
+            weight = edge_weights_list.get(f"{node}-{neighbor}") or edge_weights_list.get(f"{neighbor}-{node}") or 1
             
             # Adicionar aresta ao grafo e ao conjunto de rastreamento
             G.add_edge(edge_key[0], edge_key[1], weight=weight)
@@ -123,7 +121,7 @@ def carteiroChines(adj_list, edge_weights_list, start_node):
         for u, v in duplicated_edges:
             edge_key = f"{u}-{v}"
             reversed_edge_key = f"{v}-{u}"
-            weight = edge_weights.get(edge_key) or edge_weights.get(reversed_edge_key) or 1
+            weight = edge_weights_list.get(edge_key) or edge_weights_list.get(reversed_edge_key) or 1
             G.add_edge(int(u), int(v), weight=weight)
 
         print("Numero de arestas duplicadas", len(duplicated_edges))
@@ -135,28 +133,28 @@ def carteiroChines(adj_list, edge_weights_list, start_node):
     return result
 
 
-print("Executanto calculo pra solução na modelagem 'Quarteirões'")
+# print("Executanto calculo pra solução na modelagem 'Quarteirões'")
 
-# Carregar lista de adjacência
-with open(adjacency_list_file, "r") as file:
-    adj_list = json.load(file)
+# # Carregar lista de adjacência
+# with open(adjacency_list_file, "r") as file:
+#     adj_list = json.load(file)
 
-# Carregar pesos das arestas
-with open(edge_weights_file, "r") as file:
-    edge_weights_list = json.load(file)
-
-
-carteiroChines(adj_list, edge_weights_list, fixed_start_node)
-
-print("Executanto calculo pra solução na modelagem 'Esquinas'")
-
-# Carregar lista de adjacência
-with open(esq_adjacency_list_file, "r") as file:
-    adj_list = json.load(file)
-
-# Carregar pesos das arestas
-with open(esq_edge_weights_file, "r") as file:
-    edge_weights_list = json.load(file)
+# # Carregar pesos das arestas
+# with open(edge_weights_file, "r") as file:
+#     edge_weights_list = json.load(file)
 
 
-carteiroChines(adj_list, edge_weights_list, fixed_start_node)
+# carteiroChines(adj_list, edge_weights_list, fixed_start_node)
+
+# print("Executanto calculo pra solução na modelagem 'Esquinas'")
+
+# # Carregar lista de adjacência
+# with open(esq_adjacency_list_file, "r") as file:
+#     adj_list = json.load(file)
+
+# # Carregar pesos das arestas
+# with open(esq_edge_weights_file, "r") as file:
+#     edge_weights_list = json.load(file)
+
+
+# carteiroChines(adj_list, edge_weights_list, fixed_start_node)
